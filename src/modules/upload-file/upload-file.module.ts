@@ -21,6 +21,5 @@ import awsConfig from '../../common/configs/aws.config';
     }),
   ],
   controllers: [UploadFileController],
-  providers: [MulterConfigService],
 })
 export class UploadFileModule {}

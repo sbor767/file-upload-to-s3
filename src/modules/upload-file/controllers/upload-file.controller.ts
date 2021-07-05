@@ -1,6 +1,5 @@
 import {
   Controller,
-  Headers,
   HttpCode,
   Post,
   UploadedFile,
@@ -18,7 +17,7 @@ import { BadRequestException } from '@nestjs/common';
 import { UploadFileResponse } from '../responses/upload.response';
 import { ErrorBadRequestResponse } from '../../../common/responses/error.bad-request.response';
 import { ErrorPayloadTooLargeResponse } from '../../../common/responses/error.payload-too-large.response';
-import { IFileWithTransform } from '../interfaces/file-with-transform.interface';
+import { IFileWithTransforms } from '../interfaces/file-with-transforms.interface';
 import { ApiFile } from '../decorators/api-file.decorator';
 
 @Controller('upload-file')
@@ -43,7 +42,7 @@ export class UploadFileController {
     description: 'File too large',
   })
   uploadFile(@UploadedFile() file: Express.Multer.File): UploadFileResponse[] {
-    const { transforms } = (file as IFileWithTransform) || {};
+    const { transforms } = (file as IFileWithTransforms) || {};
     if (!file || !transforms) {
       throw new BadRequestException('No file chosen');
     }
